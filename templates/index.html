@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>News Digest AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        h1 {
+            color: #333;
+        }
+        .article {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .title {
+            font-weight: bold;
+        }
+        .summary {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>📰 News Digest – Zusammenfassungen</h1>
+
+    {% for article in articles %}
+        <div class="article">
+            <div class="title">{{ article.title }}</div>
+            <div class="summary">📝 {{ article.summary }}</div>
+        </div>
+    {% endfor %}
+</body>
+</html>
+

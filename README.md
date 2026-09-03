@@ -5,9 +5,9 @@ Ein intelligentes News-Aggregation-Tool, das automatisch Nachrichten von verschi
 ## Features ✨
 
 - **Automatische RSS-Feed-Sammlung** von deutschen und internationalen Nachrichtenquellen
-- **KI-basierte Textzusammenfassung** mit Facebook's BART-Large-CNN Modell
+- **KI-basierte Textzusammenfassung** mit dem Modell `facebook/bart-large-cnn` über Hugging Face Transformers
 - **Web-Interface** mit Flask für einfache Bedienung
-- **Mehrsprachige Unterstützung** (Deutsch/Englisch)
+- **Verarbeitung deutscher und englischer Nachrichtentexte** Das verwendete BART-Modell ist primär für englische                Zusammenfassungen optimiert; bei deutschen Texten kann die Qualität variieren
 - **Fehlerbehandlung** für robuste Performance
 
 ## Nachrichtenquellen 📡
@@ -49,7 +49,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-**Hinweis:** Beim ersten Start wird das KI-Modell (~500MB) heruntergeladen. Dies kann 2-3 Minuten dauern.
+**Hinweis:** Beim ersten Start wird das KI-Modell heruntergeladen. Der Modelldownload umfasst ca. 1,6 GB. Die Dauer hängt von der Internetverbindung und dem verwendeten System ab.
 
 ## Verwendung 💻
 
@@ -60,7 +60,7 @@ python main.py
 
 Das Programm:
 1. Sammelt automatisch Artikel von allen RSS-Feeds
-2. Lädt das KI-Summarization-Modell
+2. Lädt das KI- Modell zur Textzusammenfassung
 3. Erstellt Zusammenfassungen der ersten 10 Artikel
 4. Zeigt Titel und KI-generierte Zusammenfassungen an
 
@@ -105,17 +105,18 @@ news-digest-ai/
 - **requests** - HTTP-Anfragen
 
 ### KI-Modell
-- **Modell:** facebook/bart-large-cnn
+- **Modell:** `facebook/bart-large-cnn`
+- **Bibliothek:** Hugging Face Transformers
 - **Zweck:** Automatische Textzusammenfassung
-- **Sprachen:** Hauptsächlich Englisch, funktioniert teilweise auch mit Deutsch
-- **Ausgabe:** 30-130 Wörter pro Zusammenfassung
+- **Sprache:** Primär für englische Texte optimiert; deutsche Texte werden ebenfalls verarbeitet, die Qualität kann variieren
+- **Ausgabelänge:** konfigurierbar über `min_length` und `max_length`
 
-## Beispiel-Output 📋
+## Beispielhafte Ausgabe 📋
 
 ```
 News Digest AI startet...
 Sammle Nachrichten von RSS-Feeds...
-Gefunden: 47 Artikel
+Gefunden: [Anzahl] Artikel
 Setup erfolgreich
 Projekt bereit für Entwicklung!
 
@@ -151,8 +152,8 @@ summary = summarizer(text, max_length=130, min_length=30)
 
 **Problem:** Modell lädt nicht
 ```
-Lösung: Überprüfen Sie Ihre Internetverbindung und stellen Sie sicher, 
-dass genügend Speicherplatz (mind. 1GB) verfügbar ist.
+Lösung: Überprüfen Sie Ihre Internetverbindung und stellen Sie sicher,
+dass mehrere GB freier Speicherplatz für Modell und Cache verfügbar sind.
 ```
 
 **Problem:** RSS-Feed nicht erreichbar
@@ -163,8 +164,7 @@ Lösung: Einzelne Feeds können temporär offline sein. Das Programm
 
 **Problem:** Speicher-Fehler beim KI-Modell
 ```
-Lösung: Schließen Sie andere Programme um RAM freizugeben, 
-oder verwenden Sie einen Computer mit mehr Arbeitsspeicher (mind. 4GB empfohlen).
+Lösung: Schließen Sie andere speicherintensive Programme. Das KI-Modell benötigt je nach System mehrere GB Arbeitsspeicher.
 ```
 
 ## Roadmap 🛣️
@@ -189,11 +189,10 @@ Beiträge sind willkommen! Bitte:
 
 ## Lizenz 📄
 
-Dieses Projekt steht unter der MIT-Lizenz. Details finden Sie in der [LICENSE](LICENSE) Datei.
+Dieses Projekt steht unter der MIT-Lizenz. 
+## Autorin 👨‍💻
 
-## Autor 👨‍💻
-
-**Ella Polakowska**
+**Elzbieta Zuzanna Polakowska**
 - GitHub: [@elap-code](https://github.com/elap-code)
 - E-Mail: ellapolakowska@gmail.com
 
@@ -203,6 +202,3 @@ Dieses Projekt steht unter der MIT-Lizenz. Details finden Sie in der [LICENSE](L
 - Facebook AI für das BART-Modell
 - Alle Nachrichtenquellen für ihre RSS-Feeds
 
----
-
-**⭐ Wenn Ihnen dieses Projekt gefällt, geben Sie ihm einen Stern!**
